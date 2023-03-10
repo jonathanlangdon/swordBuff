@@ -12,8 +12,8 @@ html, body {
 button {
   border-radius: var(--web-ui_button-border-radius,12px);
   font-size: 16px;
-  padding: 11px;
-  margin: 4px;
+  padding: 9px;
+  margin: 3px;
   font-weight: 500;
   border-color: gray;
 }
@@ -137,4 +137,32 @@ h1, h2 {
 
 .incorrect {
   background-color: pink;
+}
+
+@media (min-width: 769px) {
+  .grid-container {
+    grid-template-columns: 1fr minmax(768px, 1fr) 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "verse"
+      "word-bank"
+      "drop-area"
+      "footer"
+  }
+  .side-bottom {
+    flex: 0;
+  }
+}
+
+@media (max-width: 595px) {
+  button {
+    font-size: 15px;
+    padding: 6px;
+  }
 }
