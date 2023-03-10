@@ -1,0 +1,140 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: white;
+}
+
+button {
+  border-radius: var(--web-ui_button-border-radius,12px);
+  font-size: 16px;
+  padding: 11px;
+  margin: 4px;
+  font-weight: 500;
+  border-color: gray;
+}
+
+h1, h2 {
+  text-align: center;
+  margin: 0;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas:
+    "side1 header side2"
+    "side1 verse side2"
+    "side1 word-bank side2"
+    "side1 drop-area side2"
+    "side1 footer side2";
+  position: relative; /* add position:relative to the grid container */
+}
+
+.header {
+  grid-area: header
+}
+
+.side1 {
+  grid-area: side1;
+}
+
+.side2 {
+  grid-area: side2;
+}
+
+.verse {
+  grid-area: verse;
+}
+
+.drop-area {
+  grid-area: drop-area;
+  display: grid;
+  grid-template-rows: auto;
+  border-top: 2px solid lightgray;
+}
+
+.drop-line {
+  border-top: 2px solid lightgray;
+  padding: 25px;
+}
+
+#word-bank {
+  grid-area: word-bank;
+  justify-content: center;
+  align-items: baseline;
+  vertical-align: top;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+#input-box {
+  border-radius: var(--web-ui_button-border-radius,12px);
+  font-size: 16px;
+  padding: 11px;
+  margin: 4px;
+  font-weight: 500;
+  border-color: gray;
+}
+
+.footer {
+  grid-area: footer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  border-top: 2px solid lightgray;
+}
+
+.side-bottom {
+  flex: 1;
+}
+
+.check-area {
+  flex: 2;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+}
+
+.check-area button {
+  background-color: #40cc02;
+  color: white;
+  font-weight: bold;
+}
+
+.result-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px;
+  background-color: white;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+}
+
+.result-box p {
+  margin: 0;
+}
+
+.result-box button {
+  margin-left: 10px;
+}
+
+.correct {
+  background-color: lightgreen;
+}
+
+.incorrect {
+  background-color: pink;
+}
