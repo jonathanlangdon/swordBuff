@@ -57,20 +57,21 @@ function checkUserInput() {
   // Split the original verse string into an array of words, ignoring punctuation
   const verseArray = verseString.replace(/[^\w\s]/gi, "").split(" ");
 
-  // Loop over the word buttons and add a CSS class to each one based on whether it is correct or incorrect
-  const wordButtons = document.querySelectorAll('.word-button');
-  wordButtons.forEach(button => {
-    const word = button.dataset.word.replace(/[^\w\s]/gi, "");
-    if (selectedWords.includes(word)) {
-      if (selectedWords.indexOf(word) === verseArray.indexOf(word)) {
-        button.classList.add('correct');
-      } else {
-        button.classList.add('incorrect');
-      }
+  // Loop over the selectedWordsButtons array and compare each selected word to the corresponding word in the verse
+  for (let i = 0; i < selectedWordsButtons.length; i++) {
+    const selectedWord = selectedWords[i];
+    const verseWord = verseArray[i];
+    const button = selectedWordsButtons[i];
+
+    // Check if the selected word matches the corresponding word in the verse
+    if (selectedWord === verseWord) {
+      button.classList.add("correct");
+      button.classList.remove("incorrect");
     } else {
-      button.classList.remove('correct', 'incorrect');
+      button.classList.add("incorrect");
+      button.classList.remove("correct");
     }
-  });
+  }
 
   // Count how many words are in the correct position
   const numWordsInCorrectPosition = selectedWords.reduce((acc, word, i) => {
