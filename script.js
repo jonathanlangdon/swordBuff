@@ -73,6 +73,29 @@ function checkUserInput() {
     }
   }
 
+  // Remove all the word buttons from the word-bank container
+  while (wordBankContainer.firstChild) {
+    wordBankContainer.removeChild(wordBankContainer.firstChild);
+  }
+
+  // Loop over the verse array and create a button element for each word
+  for (const word of verseArray) {
+    const button = document.createElement('button');
+    button.textContent = word;
+    button.id = `button-${buttonLabels.length}`;
+    button.classList.add('word-button');
+    button.dataset.word = word;
+    buttonLabels.push(word);
+    wordBankContainer.appendChild(button);
+  }
+
+  // Append the document fragment to the parent container
+  wordBankContainer.appendChild(fragment);
+
+  // Set the fixed height of the container using CSS
+  const containerHeight = wordBankContainer.offsetHeight;
+  wordBankContainer.style.height = `${containerHeight}px`;
+
   // Count how many words are in the correct position
   const numWordsInCorrectPosition = selectedWords.reduce((acc, word, i) => {
     return acc + (verseArray[i] === word ? 1 : 0);
