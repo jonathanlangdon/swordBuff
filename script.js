@@ -134,7 +134,7 @@ resetButton.addEventListener("click", () => {
 });
 
 
-// Create a result box element with a close button
+// Create a result box element
 function createResultBox(text) {
   const resultBox = document.createElement("div");
   resultBox.classList.add("result-box");
@@ -143,12 +143,4 @@ function createResultBox(text) {
   resultText.textContent = text;
   resultBox.appendChild(resultText);
 
-  const closeButton = document.createElement("button");
-  closeButton.textContent = "Close";
-  closeButton.addEventListener("click", () => {
-    resultBox.remove();
-  });
-  resultBox.appendChild(closeButton);
-
-  return resultBox;
 }

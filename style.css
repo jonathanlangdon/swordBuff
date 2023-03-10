@@ -1,5 +1,6 @@
 html, body {
-  height: 100%;
+  overflow-y: auto;
+  height: calc(100% - 45px);
   margin: 0;
 }
 
@@ -112,6 +113,11 @@ h1, h2 {
   font-weight: bold;
 }
 
+#check-results {
+  text-align: center;
+  font-size: 14px;
+}
+
 .result-box {
   position: fixed;
   top: 0;
@@ -164,5 +170,12 @@ h1, h2 {
   button {
     font-size: 15px;
     padding: 6px;
+  }
+}
+
+@media (max-width: 400px) {
+  button {
+    font-size: 13px;
+    padding: 5px;
   }
 }
