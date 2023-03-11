@@ -13,7 +13,7 @@ html, body {
 button {
   border-radius: var(--web-ui_button-border-radius,12px);
   font-size: 16px;
-  padding: 9px;
+  padding: 8px;
   margin: 3px;
   font-weight: 500;
   border-color: gray;
@@ -38,10 +38,10 @@ h1, h2 {
 .header {
   grid-area: header;
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 61px 3fr 68px;
   grid-template-areas:
-    "logo title menu"
-    "logo verse menu";
+    "logo title menu-button"
+    "logo verse menu-button";
 }
 
 .side1 {
@@ -58,11 +58,6 @@ h1, h2 {
 
 .logo {
   grid-area: logo;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  max-height: calc(100vh - 0px);
 }
 
 .logo img {
@@ -71,6 +66,17 @@ h1, h2 {
   border-radius: var(--web-ui_button-border-radius,12px);
   max-height: 68px;
   max-width: 100%;
+}
+
+.menu-button {
+  grid-area: menu-button;
+}
+
+.menu-button img {
+  height: 50%;
+  width: auto;
+  max-height: 38px;
+  max-width: 38px;
 }
 
 .verse {
