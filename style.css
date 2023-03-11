@@ -175,7 +175,7 @@ h1, h2 {
 
 @media (max-width: 400px) {
   button {
-    font-size: 13px;
+    font-size: 12px;
     padding: 5px;
   }
 }
