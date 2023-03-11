@@ -29,7 +29,6 @@ h1, h2 {
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas:
     "side1 header side2"
-    "side1 verse side2"
     "side1 word-bank side2"
     "side1 drop-area side2"
     "side1 footer side2";
@@ -37,7 +36,12 @@ h1, h2 {
 }
 
 .header {
-  grid-area: header
+  grid-area: header;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-areas:
+    "logo title menu"
+    "logo verse menu";
 }
 
 .side1 {
@@ -46,6 +50,27 @@ h1, h2 {
 
 .side2 {
   grid-area: side2;
+}
+
+.title {
+  grid-area: title;
+}
+
+.logo {
+  grid-area: logo;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  max-height: calc(100vh - 0px);
+}
+
+.logo img {
+  height: auto;
+  background-color: lightgray;
+  border-radius: var(--web-ui_button-border-radius,12px);
+  max-height: 68px;
+  max-width: 100%;
 }
 
 .verse {
@@ -156,7 +181,6 @@ h1, h2 {
     grid-template-columns: 1fr;
     grid-template-areas:
       "header"
-      "verse"
       "word-bank"
       "drop-area"
       "footer"
