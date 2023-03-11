@@ -17,6 +17,7 @@ button {
   margin: 3px;
   font-weight: 500;
   border-color: gray;
+  min-width: 55px;
 }
 
 h1, h2 {
@@ -37,11 +38,14 @@ h1, h2 {
 
 .header {
   grid-area: header;
-  display: grid;
-  grid-template-columns: 61px 3fr 68px;
-  grid-template-areas:
-    "logo title menu-button"
-    "logo verse menu-button";
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  box-sizing: border-box;
+  border-botom: 2px solid lightgray;
 }
 
 .side1 {
@@ -62,7 +66,7 @@ h1, h2 {
 
 .logo img {
   height: auto;
-  background-color: lightgray;
+  /*background-color: lightgray;*/
   border-radius: var(--web-ui_button-border-radius,12px);
   max-height: 68px;
   max-width: 100%;
@@ -73,10 +77,9 @@ h1, h2 {
 }
 
 .menu-button img {
-  height: 50%;
-  width: auto;
-  max-height: 38px;
-  max-width: 38px;
+  height: auto;
+  max-height: 48px;
+  max-width: 100%;
 }
 
 .verse {
@@ -87,12 +90,8 @@ h1, h2 {
   grid-area: drop-area;
   display: grid;
   grid-template-rows: auto;
-  border-top: 2px solid lightgray;
-}
-
-.drop-line {
-  border-top: 2px solid lightgray;
-  padding: 25px;
+  border-top: 6px solid lightgray;
+  padding-top: 10px;
 }
 
 #word-bank {
@@ -101,7 +100,7 @@ h1, h2 {
   align-items: baseline;
   vertical-align: top;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 #input-box {
@@ -118,7 +117,6 @@ h1, h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
   position: fixed;
   bottom: 0;
   width: 100%;

@@ -1,5 +1,5 @@
 // Define the verse string
-const verseString = "The Lord is my light and my salvation whom shall I fear? The Lord is the stronghold of my life, of whom shall I be afraid?";
+const verseString = "At once the royal secretaries were summoned; on the twenty-third day of the third month, the month of Sivan. They wrote out all Mordecai's orders to the Jews, and to the satraps, governors and nobles of the 127 provinces stretching from India to Cush. These orders were written in the script of each province";
 // Split the verse string into an array of words and shuffle them
 const verseArray = verseString.split(" ").sort(() => Math.random() - 0.5);
 
@@ -26,8 +26,8 @@ for (const word of verseArray) {
 wordBankContainer.appendChild(fragment);
 
 // Set the fixed height of the container using CSS
-const containerHeight = wordBankContainer.offsetHeight;
-wordBankContainer.style.height = `${containerHeight}px`;
+//const containerHeight = wordBankContainer.offsetHeight;
+//wordBankContainer.style.height = `${containerHeight}px`;
 
 // Get all the word buttons and add event listeners to them
 const wordButtons = document.querySelectorAll('.word-button');
