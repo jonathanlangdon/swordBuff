@@ -1,6 +1,14 @@
-//$.get('http://68.61.132.101:5000/random-verse', function(data) {
 $.get('http://192.168.3.11:5000/random-verse', function(data) {
-  const verseString = data.verse;
+  const verses = data.verses;
+  let currentBook = '';
+  let currentChapter = 0;
+  verses.forEach(function(verse) {
+    if (verse.book !== currentBook || verse.chapter !== currentChapter) {
+      currentBook = verse.book;
+      currentChapter = verse.chapter;
+    }
+  });
+  const verseString = verses[0].text;
   // Split the verse string into an array of words and shuffle them
   const verseArray = verseString.split(" ").sort(() => Math.random() - 0.5);
   // Get references to the DOM elements
@@ -156,45 +164,47 @@ $.get('http://192.168.3.11:5000/random-verse', function(data) {
   }
 
 
-  //------------------------------------------------------------
+    //------------------------------------------------------------
 
-  $(document).ready(function() {
-    // Listen for clicks on the submit button
-    $("#submit").click(function() {
-      // Get the user's input
-      const userInput = $("#input-box").val().trim();
+    $(document).ready(function() {
+      // Listen for clicks on the submit button
+      $("#submit").click(function() {
+        // Get the user's input
+        const userInput = $("#input-box").val().trim();
 
-      // Sanitize the input to prevent XSS attacks
-      const sanitizedInput = sanitizeInput(userInput);
+        // Sanitize the input to prevent XSS attacks
+        const sanitizedInput = sanitizeInput(userInput);
 
-      // Check if the input matches the verse
-      if (sanitizedInput === verseString) {
-        // Display a success message
-        const resultBox = createResultBox("Great job! You got it right!");
-        $("#result-container").append(resultBox);
+        // Check if the input matches the verse
+        if (sanitizedInput === verseString) {
+          // Display a success message
+          const resultBox = createResultBox("Great job! You got it right!");
+          $("#result-container").append(resultBox);
 
-        // Disable the input and submit button
-        $("#input-box").attr("disabled", true);
-        $("#submit").attr("disabled", true);
-      } else {
-        // Display an error message
-        const resultBox = createResultBox("Sorry, that's not correct. Please try again.");
-        $("#result-container").append(resultBox);
-      }
+          // Disable the input and submit button
+          $("#input-box").attr("disabled", true);
+          $("#submit").attr("disabled", true);
+        } else {
+          // Display an error message
+          const resultBox = createResultBox("Sorry, that's not correct. Please try again.");
+          $("#result-container").append(resultBox);
+        }
 
-      // Clear the input field
-      $("#input-box").val("");
+        // Clear the input field
+        $("#input-box").val("");
+      });
+
+      // Listen for clicks on the reset button
+      $("#reset").click(function() {
+        // Reload the page to get a new verse
+        location.reload();
+      });
     });
 
-    // Listen for clicks on the reset button
-    $("#reset").click(function() {
-      // Reload the page to get a new verse
-      location.reload();
-    });
-  });
 });
 
-//--------------------------------------------------------------------
+
+    //--------------------------------------------------------------------
 
 // Create a result box element
 function createResultBox(text) {
