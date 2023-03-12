@@ -78,7 +78,7 @@ h1, h2 {
 
 .menu-button img {
   height: auto;
-  max-height: 48px;
+  max-height: 30px;
   max-width: 100%;
 }
 
@@ -136,8 +136,20 @@ h1, h2 {
   align-items: center;
 }
 
-.check-area button {
+#reset {
+  background-color: red;
+  color: white;
+  font-weight: bold;
+}
+
+#check {
   background-color: #40cc02;
+  color: white;
+  font-weight: bold;
+}
+
+.next-button {
+  background-color: #1364c9;
   color: white;
   font-weight: bold;
 }
