@@ -1,3 +1,4 @@
+//$.get('http://68.61.132.101:5000/random-verse', function(data) {
 $.get('http://192.168.3.11:5000/random-verse', function(data) {
   const verseString = data.verse;
   // Split the verse string into an array of words and shuffle them
