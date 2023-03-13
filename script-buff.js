@@ -1,5 +1,7 @@
 jQuery.get('http://192.168.3.11:5000/random-verse', function (data) {
   const verses = data.verses;
+  const numVerses = Object.keys(verses).length;
+  let verseIndex = 0;
   let currentBook = '';
   let currentChapter = 0;
   verses.forEach(function(verse) {
@@ -15,8 +17,6 @@ jQuery.get('http://192.168.3.11:5000/random-verse', function (data) {
   const buttonLabels = [];
   let wordButtonsEnabled = true;
   const resetButton = document.querySelector("#reset");
-  const checkButton = document.querySelector("#check");
-  const nextButton = document.querySelector("#next-button");
   const checkArea = document.querySelector(".check-area");
   const checkResultsContainer = document.querySelector("#check-results");
   const newButton = document.createElement("button");
@@ -91,34 +91,44 @@ jQuery.get('http://192.168.3.11:5000/random-verse', function (data) {
     resetWordsInContainer(dropAreaContainer);
     verseArray = verseString.split(" ").sort(() => Math.random() - 0.5);
     createWordButtons();
+    const nextButton = document.querySelector("#next-button");
     nextButton.remove();
     newButton.textContent = "CHECK";
     newButton.id = "check";
     checkArea.appendChild(newButton);
   });
 
-  document.addEventListener("click", (event) => {
-    if (event.target && event.target.id === "check") {
-      wordButtonsEnabled = false;
-      checkUserInput();
-      checkButton.remove();
-      newButton.textContent = "NEXT";
-      newButton.id = "next-button";
-      checkArea.appendChild(newButton);
-    }
-  });
+    document.addEventListener("click", (event) => {
+      if (event.target && event.target.id === "check") {
+        wordButtonsEnabled = false;
+        checkUserInput();
+        const checkButton = document.querySelector("#check");
+        checkButton.remove();
+        console.log(verseIndex);
+        if (verseIndex < (numVerses - 1)) {
+        newButton.textContent = "NEXT";
+        newButton.id = "next-button";
+        checkArea.appendChild(newButton);
+        } else {
+        newButton.textContent = "DONE";
+        newButton.id = "done";
+        checkArea.appendChild(newButton);
+        }
+      } else if (event.target && event.target.id === "next-button") {
+        verseString = verses[verseIndex += 1].text;
+        wordButtonsEnabled = true;
+        resetWordsInContainer(wordBankContainer);
+        resetWordsInContainer(dropAreaContainer);
+        verseArray = verseString.split(" ").sort(() => Math.random() - 0.5);
+        createWordButtons();
+        const nextButton = document.querySelector("#next-button");
+        nextButton.remove();
+        newButton.textContent = "CHECK";
+        newButton.id = "check";
+        checkArea.appendChild(newButton);
+        
+      }
+    });
 
-  document.addEventListener("click", (event) => {
-    if (event.target && event.target.id === "next-button") {
-      verseString = verses[0].text;
-      wordButtonsEnabled = true;
-      resetWordsInContainer(wordBankContainer);
-      resetWordsInContainer(dropAreaContainer);
-      verseArray = verseString.split(" ").sort(() => Math.random() - 0.5);
-      createWordButtons();
-      newButton.textContent = "CHECK";
-      newButton.id = "check";
-      checkArea.appendChild(newButton);
-    }
-  });
+
 });

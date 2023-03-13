@@ -193,6 +193,12 @@ h1, h2 {
   }
 }
 
+@media (max-width: 970px) {
+  .side-bottom {
+    flex: 0;
+  }
+}
+
 @media (max-width: 768px) {
   .grid-container {
     grid-template-columns: 1fr;
@@ -201,9 +207,6 @@ h1, h2 {
       "word-bank"
       "drop-area"
       "footer"
-  }
-  .side-bottom {
-    flex: 0;
   }
 }
 
