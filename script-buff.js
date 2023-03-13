@@ -1,4 +1,3 @@
-'use strict';
 jQuery.get('http://192.168.3.11:5000/random-verse', function (data) {
   const verses = data.verses;
   let currentBook = '';
@@ -9,11 +8,18 @@ jQuery.get('http://192.168.3.11:5000/random-verse', function (data) {
       currentChapter = verse.chapter;
     }
   });
-  const verseString = verses[0].text;
+  let verseString = verses[0].text;
   let verseArray = verseString.split(" ").sort(() => Math.random() - 0.5);
   const wordBankContainer = document.getElementById("word-bank");
   const dropAreaContainer = document.getElementById('drop-line');
   const buttonLabels = [];
+  let wordButtonsEnabled = true;
+  const resetButton = document.querySelector("#reset");
+  const checkButton = document.querySelector("#check");
+  const nextButton = document.querySelector("#next-button");
+  const checkArea = document.querySelector(".check-area");
+  const checkResultsContainer = document.querySelector("#check-results");
+  const newButton = document.createElement("button");
 
   function createWordButtons() {
     const fragment = document.createDocumentFragment();
@@ -28,14 +34,23 @@ jQuery.get('http://192.168.3.11:5000/random-verse', function (data) {
       fragment.appendChild(button);
     });
     wordBankContainer.appendChild(fragment);
+    const wordButtons = document.querySelectorAll('.word-button');
+    wordButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        if (button.parentNode === wordBankContainer && wordButtonsEnabled) {
+          dropAreaContainer.appendChild(button);
+        }
+        else if (button.parentNode === dropAreaContainer && wordButtonsEnabled) {
+          wordBankContainer.appendChild(button);
+        }
+      });
+    });
   }
 
-  function resetWordBankContainer() {
-    while (wordBankContainer.firstChild) {
-      wordBankContainer.removeChild(wordBankContainer.firstChild);
+  function resetWordsInContainer(containerName) {
+    while (containerName.firstChild) {
+      containerName.removeChild(containerName.firstChild);
     }
-    verseArray = verseString.split(" ");
-    createWordButtons();
   }
 
   function checkUserInput() {
@@ -53,7 +68,9 @@ jQuery.get('http://192.168.3.11:5000/random-verse', function (data) {
         button.classList.remove("correct");
       }
     });
-    resetWordBankContainer();
+    resetWordsInContainer(wordBankContainer);
+    verseArray = verseString.split(" ");
+    createWordButtons();
     const wordsGood = selectedWords.reduce((acc, word, i) => acc + (verseArray[i] === word ? 1 : 0), 0);
     const totalWords = verseArray.length;
     const percentageCorrect = Math.round((wordsGood / totalWords) * 100);  
@@ -63,47 +80,45 @@ jQuery.get('http://192.168.3.11:5000/random-verse', function (data) {
     } else {
       resultText = `Good effort! You got ${percentageCorrect}% correct. Want to try it again?`;
     }
-    const checkResultsContainer = document.querySelector("#check-results");
     checkResultsContainer.textContent = resultText;
   }
   
   createWordButtons();
 
-  let dropAreaButtonsEnabled = true;
-  const wordButtons = document.querySelectorAll('.word-button');
-  wordButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      if (button.parentNode === wordBankContainer) {
-        dropAreaContainer.appendChild(button);
-      }
-      else if (button.parentNode === dropAreaContainer && dropAreaButtonsEnabled) {
-        wordBankContainer.appendChild(button);
-      }
-    });
-  });
-  const resetButton = document.querySelector("#reset");
   resetButton.addEventListener("click", () => {
-    // Enable the buttons in the drop area
-    dropAreaButtonsEnabled = true;
-    resetWordBankContainer();
-  });
-
-  const checkButton = document.querySelector("#check");
-  checkButton.addEventListener("click", () => {
-    dropAreaButtonsEnabled = false;
-    checkUserInput();
-    checkButton.remove();
-    const nextButton = document.createElement("button");
-    nextButton.textContent = "NEXT";
-    nextButton.id = "next";
-    nextButton.classList.add("next-button");
-    const checkArea = document.querySelector(".check-area");
-    checkArea.appendChild(nextButton);
+    wordButtonsEnabled = true;
+    resetWordsInContainer(wordBankContainer);
+    resetWordsInContainer(dropAreaContainer);
+    verseArray = verseString.split(" ").sort(() => Math.random() - 0.5);
+    createWordButtons();
+    nextButton.remove();
+    newButton.textContent = "CHECK";
+    newButton.id = "check";
+    checkArea.appendChild(newButton);
   });
 
   document.addEventListener("click", (event) => {
-    if (event.target && event.target.id === "next") {
-      // Add your code to handle the Next button event
+    if (event.target && event.target.id === "check") {
+      wordButtonsEnabled = false;
+      checkUserInput();
+      checkButton.remove();
+      newButton.textContent = "NEXT";
+      newButton.id = "next-button";
+      checkArea.appendChild(newButton);
+    }
+  });
+
+  document.addEventListener("click", (event) => {
+    if (event.target && event.target.id === "next-button") {
+      verseString = verses[0].text;
+      wordButtonsEnabled = true;
+      resetWordsInContainer(wordBankContainer);
+      resetWordsInContainer(dropAreaContainer);
+      verseArray = verseString.split(" ").sort(() => Math.random() - 0.5);
+      createWordButtons();
+      newButton.textContent = "CHECK";
+      newButton.id = "check";
+      checkArea.appendChild(newButton);
     }
   });
 });
