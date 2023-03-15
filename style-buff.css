@@ -82,7 +82,7 @@ h1, h2 {
   max-width: 100%;
 }
 
-.verse {
+#verse {
   grid-area: verse;
 }
 

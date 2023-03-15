@@ -1,6 +1,5 @@
 jQuery.get('http://192.168.3.11:5000/random-verse', function (data) {
   let verses = [];
-console.log(verses);
   data.verses.forEach(function(verseData) {
     const text = verseData.text;
     const match = text.match(/(\d+):(.+?)(?=\s\d|"$)/g);
@@ -19,19 +18,17 @@ console.log(verses);
     } else {
       verses.push(verseData);
     }
-    console.log(verses);
+    console.log(verses)
   });
   const numVerses = Object.keys(verses).length;
   let verseIndex = 0;
   let currentBook = '';
   let currentChapter = 0;
-  verses.forEach(function(verse) {
-    if (verse.book !== currentBook || verse.chapter !== currentChapter) {
-      currentBook = verse.book;
-      currentChapter = verse.chapter;
-    }
-  });
-  let verseString = verses[0].text;
+  let currentVerse = verses[0];
+  currentBook = currentVerse.book;
+  currentChapter = currentVerse.chapter;
+  let verseString = currentVerse.text;
+  verseString = verseString.replace(/^\d+:\s*/, '');
   let verseArray = verseString.split(" ").sort(() => Math.random() - 0.5);
   const wordBankContainer = document.getElementById("word-bank");
   const dropAreaContainer = document.getElementById('drop-line');
@@ -41,6 +38,9 @@ console.log(verses);
   const checkArea = document.querySelector(".check-area");
   const checkResultsContainer = document.querySelector("#check-results");
   const newButton = document.createElement("button");
+  let verseContainer = document.getElementById("verse");
+
+  verseContainer.textContent = currentVerse.book + " " + currentVerse.chapter + ':' + currentVerse.verse_start;
 
   function createWordButtons() {
     const fragment = document.createDocumentFragment();
@@ -125,7 +125,6 @@ console.log(verses);
         checkUserInput();
         const checkButton = document.querySelector("#check");
         checkButton.remove();
-        console.log(verseIndex);
         if (verseIndex < (numVerses - 1)) {
         newButton.textContent = "NEXT";
         newButton.id = "next-button";
@@ -137,6 +136,8 @@ console.log(verses);
         }
       } else if (event.target && event.target.id === "next-button") {
         verseString = verses[verseIndex += 1].text;
+        verseContainer.textContent = verses[verseIndex].book + " " + verses[verseIndex].chapter + ':' + verses[verseIndex].verse_start;
+        verseString = verseString.replace(/^\d+:\s*/, '');
         wordButtonsEnabled = true;
         resetWordsInContainer(wordBankContainer);
         resetWordsInContainer(dropAreaContainer);
