@@ -1,5 +1,26 @@
 jQuery.get('http://192.168.3.11:5000/random-verse', function (data) {
-  const verses = data.verses;
+  let verses = [];
+console.log(verses);
+  data.verses.forEach(function(verseData) {
+    const text = verseData.text;
+    const match = text.match(/(\d+):(.+?)(?=\s\d|"$)/g);
+    if (match) {
+      match.forEach(function(verseString) {
+        const verseNum = parseInt(verseString.match(/\d+/)[0]);
+        const verse = {
+          book: verseData.book,
+          chapter: verseData.chapter,
+          text: verseString,
+          verse_start: verseNum,
+          verse_end: verseNum
+        };
+        verses.push(verse);
+      });
+    } else {
+      verses.push(verseData);
+    }
+    console.log(verses);
+  });
   const numVerses = Object.keys(verses).length;
   let verseIndex = 0;
   let currentBook = '';
@@ -129,6 +150,4 @@ jQuery.get('http://192.168.3.11:5000/random-verse', function (data) {
         
       }
     });
-
-
 });
