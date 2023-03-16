@@ -1,7 +1,6 @@
-html, body {
+body {
   overflow-y: auto;
   height: calc(100% - 45px);
-  margin: 0;
 }
 
 * {
@@ -11,12 +10,12 @@ html, body {
 }
 
 button {
-  border-radius: var(--web-ui_button-border-radius,12px);
+  border-radius: 12px;
   font-size: 16px;
   padding: 8px;
   margin: 3px;
   font-weight: 500;
-  border-color: gray;
+  border: 2px solid black;
   min-width: 55px;
 }
 
@@ -30,10 +29,8 @@ h1, h2 {
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas:
     "side1 header side2"
-    "side1 word-bank side2"
     "side1 drop-area side2"
-    "side1 footer side2";
-  position: relative; /* add position:relative to the grid container */
+    "side1 word-bank side2"
 }
 
 .header {
@@ -44,7 +41,6 @@ h1, h2 {
   width: 100%;
   padding-left: 10px;
   padding-right: 10px;
-  box-sizing: border-box;
   border-bottom: 4px solid lightgray;
 }
 
@@ -66,8 +62,6 @@ h1, h2 {
 
 .logo img {
   height: auto;
-  /*background-color: lightgray;*/
-  border-radius: var(--web-ui_button-border-radius,12px);
   max-height: 68px;
   max-width: 100%;
 }
@@ -88,9 +82,7 @@ h1, h2 {
 
 .drop-area {
   grid-area: drop-area;
-  display: grid;
-  grid-template-rows: auto;
-  border-top: 4px solid lightgray;
+  border-bottom: 4px solid lightgray;
   padding-top: 10px;
 }
 
@@ -104,8 +96,13 @@ h1, h2 {
   margin-top: 10px;
 }
 
-#input-box {
-  border-radius: var(--web-ui_button-border-radius,12px);
+#drop-line {
+  overflow-y: auto;
+  max-height: 300px;
+}
+
+#input-box, #keyboard-input {
+  border-radius: 12px;
   font-size: 16px;
   padding: 11px;
   margin: 4px;
@@ -114,15 +111,12 @@ h1, h2 {
 }
 
 .footer {
-  grid-area: footer;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
   position: fixed;
   bottom: 0;
   width: 100%;
   padding: 20px;
-  box-sizing: border-box;
   border-top: 4px solid lightgray;
 }
 
@@ -131,7 +125,7 @@ h1, h2 {
 }
 
 .check-area {
-  flex: 2;
+  flex: 1;
   justify-content: space-between;
   display: flex;
   align-items: center;
@@ -204,9 +198,11 @@ h1, h2 {
     grid-template-columns: 1fr;
     grid-template-areas:
       "header"
-      "word-bank"
       "drop-area"
-      "footer"
+      "word-bank"
+  }
+  .side1, .side2, .side-bottom {
+    display: none;
   }
 }
 

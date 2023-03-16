@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="graphics/favicon.png" sizes="32x32">
-    <link rel="stylesheet" type="text/css" href="style-buff.css?v=123">
+    <link rel="stylesheet" type="text/css" href="style-buff.css">
     <title>Sword Buff</title>
   </head>
   <body>
@@ -15,21 +15,21 @@
         <div class="menu-button"><img src="graphics/menu-1.png" alt="menu"></div>
       </div>
       <div class="side1"></div>
-      <div id="word-bank"></div>
       <div class="drop-area">
         <div id="drop-line"></div></div>
+      <div id="word-bank"></div>
       <div class="side2"></div>
       <div class="footer">
-        <div class="side-bottom"></div>
+        <div class="side-bottom"> </div>
         <div class="check-area">
           <div><button id="reset">RESET</button></div>
-          <div id="check-results"></div>
-          <div><button id="check">CHECK</button></div>
+          <div id="check-results"><input type="text" id="keyboard-input" placeholder="Keyboard Input"></div>
+          <div id="check-but-container"><button id="check">CHECK</button></div>
         </div>
-        <div class="side-bottom"></div>
+        <div class="side-bottom"> </div>
       </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="script-buff.js?v=123"></script>
+    <script src="script-buff.js"></script>
   </body>
 </html>
