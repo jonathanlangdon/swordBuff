@@ -41,7 +41,7 @@ $.get('http://192.168.3.11:5000/random-verse', function (data) {
   const buttonLabels = [];
   let wordButtonsEnabled = true;
   const resetButton = document.querySelector("#reset");
-  const checkArea = document.querySelector(".check-area");
+  const checkArea = document.querySelector("#check-button-container");
   const checkResultsContainer = document.querySelector("#check-results");
   const newButton = document.createElement("button");
   let verseContainer = document.getElementById("verse");
@@ -152,10 +152,20 @@ $.get('http://192.168.3.11:5000/random-verse', function (data) {
     verseArray = shuffle(verseString.split(" "));
     createWordButtons(verseArray);
     const nextButton = document.querySelector("#next-button");
-    nextButton.remove();
-    newButton.textContent = "CHECK";
-    newButton.id = "check";
-    checkArea.appendChild(newButton);
+    if (nextButton) {
+      nextButton.remove();
+    }
+    const checkButton = document.querySelector("#check");
+    if (!checkButton) {
+      newButton.textContent = "CHECK";
+      newButton.id = "check";
+      checkArea.appendChild(newButton);
+    }
+    const inputBox = document.createElement("input");
+    inputBox.type = "text";
+    inputBox.id = "keyboard-input";
+    inputBox.placeholder = "Keyboard Input";
+    checkResultsContainer.appendChild(inputBox);
   });
 
     document.addEventListener("click", (event) => {
@@ -189,6 +199,11 @@ $.get('http://192.168.3.11:5000/random-verse', function (data) {
         newButton.textContent = "CHECK";
         newButton.id = "check";
         checkArea.appendChild(newButton);
+        const inputBox = document.createElement("input");
+        inputBox.type = "text";
+        inputBox.id = "keyboard-input";
+        inputBox.placeholder = "Keyboard Input";
+        checkResultsContainer.appendChild(inputBox);
         
       }
     });
