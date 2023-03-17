@@ -140,9 +140,9 @@ $.get('http://192.168.3.11:5000/random-verse', function (data) {
 
   createWordButtons(verseArray);
 
-  const setContainerHeight = wordBankContainer.offsetHeight;
-  wordBankContainer.style.height = `${setContainerHeight}px`;
-  dropAreaContainer.style.height = `${setContainerHeight}px`;
+  const setWordBankHeight = wordBankContainer.offsetHeight;
+  wordBankContainer.style.height = `${setWordBankHeight}px`;
+  dropAreaContainer.style.height = `${setWordBankHeight}px`;
 
   resetButton.addEventListener("click", () => {
     wordButtonsEnabled = true;
