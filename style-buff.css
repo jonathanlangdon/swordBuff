@@ -31,6 +31,7 @@ h1, h2 {
     "side1 header side2"
     "side1 drop-area side2"
     "side1 word-bank side2"
+    "side1 footer side2"
 }
 
 .header {
@@ -50,6 +51,42 @@ h1, h2 {
 
 .side2 {
   grid-area: side2;
+}
+
+#drop-area {
+  grid-area: drop-area;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  border-bottom: 4px solid lightgray;
+  position: relative;
+}
+
+#drop-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  padding-bottom: 10px;
+  flex: 0 0 0;
+  }
+
+#word-bank {
+  grid-area: word-bank;
+  justify-content: center;
+  align-items: baseline;
+  vertical-align: top;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.footer {
+  grid-area: footer;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
+  border-top: 4px solid lightgray;
 }
 
 .title {
@@ -80,27 +117,6 @@ h1, h2 {
   grid-area: verse;
 }
 
-.drop-area {
-  grid-area: drop-area;
-  border-bottom: 4px solid lightgray;
-  padding-top: 10px;
-}
-
-#word-bank {
-  grid-area: word-bank;
-  justify-content: center;
-  align-items: baseline;
-  vertical-align: top;
-  flex-wrap: wrap;
-  margin-bottom: 10px;
-  margin-top: 10px;
-}
-
-#drop-line {
-  overflow-y: auto;
-  max-height: 300px;
-}
-
 #input-box, #keyboard-input {
   border-radius: 12px;
   font-size: 16px;
@@ -108,20 +124,6 @@ h1, h2 {
   margin: 4px;
   font-weight: 500;
   border-color: gray;
-}
-
-.footer {
-  display: flex;
-  justify-content: center;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  padding: 20px;
-  border-top: 4px solid lightgray;
-}
-
-.side-bottom {
-  flex: 1;
 }
 
 .check-area {
@@ -200,6 +202,7 @@ h1, h2 {
       "header"
       "drop-area"
       "word-bank"
+      "footer"
   }
   .side1, .side2, .side-bottom {
     display: none;

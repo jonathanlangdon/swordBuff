@@ -37,7 +37,8 @@ $.get('http://192.168.3.11:5000/random-verse', function (data) {
   let verseString = currentVerse.text;
   verseString = verseString.replace(/^\d+:\s*/, '');
   const wordBankContainer = document.getElementById("word-bank");
-  const dropAreaContainer = document.getElementById('drop-line');
+  const dropAreaContainer = document.getElementById('drop-area');
+  const dropLineContainer = document.getElementById('drop-line');
   const buttonLabels = [];
   let wordButtonsEnabled = true;
   const resetButton = document.querySelector("#reset");
@@ -67,9 +68,9 @@ $.get('http://192.168.3.11:5000/random-verse', function (data) {
       wordButtons.forEach(button => {
         button.addEventListener('click', () => {
           if (button.parentNode === wordBankContainer && wordButtonsEnabled) {
-            dropAreaContainer.appendChild(button);
+            dropLineContainer.appendChild(button);
           }
-          else if (button.parentNode === dropAreaContainer && wordButtonsEnabled) {
+          else if (button.parentNode === dropLineContainer && wordButtonsEnabled) {
             wordBankContainer.appendChild(button);
           }
         });
@@ -110,7 +111,7 @@ $.get('http://192.168.3.11:5000/random-verse', function (data) {
   }
 
   function checkUserInput() {
-    const selectedWordsButtons = Array.from(dropAreaContainer.querySelectorAll("button"));
+    const selectedWordsButtons = Array.from(dropLineContainer.querySelectorAll("button"));
     const selectedWords = selectedWordsButtons.map(button => button.dataset.word.replace(/[^\w\s]/gi, "").toLowerCase());
     const correctVerseArray = verseString.replace(/[^\w\s]/gi, "").toLowerCase().split(" ");
     selectedWordsButtons.forEach((button, i) => {
@@ -140,14 +141,22 @@ $.get('http://192.168.3.11:5000/random-verse', function (data) {
 
   createWordButtons(verseArray);
 
+  const headerHeight = document.querySelector('.header').offsetHeight;
+  const footerHeight = document.querySelector('.footer').offsetHeight;
+  const windowHeight = window.innerHeight;
+  const containerHeight = (windowHeight - headerHeight - footerHeight) / 2;
+  wordBankContainer.style.height = `${containerHeight}px`;
+  dropAreaContainer.style.height = `${containerHeight}px`;
+  
+
   const setWordBankHeight = wordBankContainer.offsetHeight;
   wordBankContainer.style.height = `${setWordBankHeight}px`;
-  dropAreaContainer.style.height = `${setWordBankHeight}px`;
+  dropLineContainer.style.height = `${setWordBankHeight}px`;
 
   resetButton.addEventListener("click", () => {
     wordButtonsEnabled = true;
     resetWordsInContainer(wordBankContainer);
-    resetWordsInContainer(dropAreaContainer);
+    resetWordsInContainer(dropLineContainer);
     resetWordsInContainer(checkResultsContainer);
     verseArray = shuffle(verseString.split(" "));
     createWordButtons(verseArray);
@@ -189,7 +198,7 @@ $.get('http://192.168.3.11:5000/random-verse', function (data) {
         verseString = verseString.replace(/^\d+:\s*/, '');
         wordButtonsEnabled = true;
         resetWordsInContainer(wordBankContainer);
-        resetWordsInContainer(dropAreaContainer);
+        resetWordsInContainer(dropLineContainer);
         resetWordsInContainer(checkResultsContainer);
         verseArray = shuffle(verseString.split(" "));
         originalVerseArray = verseString.split(" ");
