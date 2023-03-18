@@ -64,18 +64,15 @@ h1, h2 {
 #drop-area {
   grid-area: drop-area;
   display: flex;
-  flex-direction: column-reverse;
   align-items: flex-start;
   border-bottom: 4px solid lightgray;
-  position: relative;
 }
 
 #drop-line {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-end;
   padding-bottom: 10px;
-  flex: 0 0 0;
+  padding-top: 10px;
   }
 
 #word-bank {

@@ -77,32 +77,36 @@ $.get('http://192.168.3.11:5000/random-verse', function (data) {
       });
     }
 
-  $(document).ready(function () {
-    const inputBox = $("#keyboard-input");
-    const wordBankContainer = $("#word-bank");
-    $(document).on("keydown", function () {
-      inputBox.focus();
-    });
-    inputBox.on("keydown", function (event) {
-      if (event.key === " " || event.key === "Enter") {
-        event.preventDefault();
-        useKeyboardInput();
-      }
-    });
-    function useKeyboardInput() {
-      let keyboardWord = inputBox.val().replace(/[^\w\s]/gi, "").toLowerCase();
-      inputBox.val(""); // Clear the input box
-      let bankWordButtons = Array.from(wordBankContainer[0].querySelectorAll("button"));
-      bankWordButtons.some((button) => {
-        let buttonWord = button.textContent.replace(/[^\w\s]/gi, "").toLowerCase();
-        if (keyboardWord === buttonWord) {
-          button.click();
-          return true; // Stop the loop when the first match is found
-        }
-        return false; // Continue the loop
+  function listenKeyboard() {
+    $(document).ready(function () {
+      const inputBox = $("#keyboard-input");
+      const wordBankContainer = $("#word-bank");
+      $(document).on("keydown", function () {
+        inputBox.focus();
       });
-    }    
-  });
+      inputBox.on("keydown", function (event) {
+        if (event.key === " " || event.key === "Enter") {
+          event.preventDefault();
+          useKeyboardInput();
+        }
+      });
+      function useKeyboardInput() {
+        let keyboardWord = inputBox.val().replace(/[^\w\s]/gi, "").toLowerCase();
+        inputBox.val(""); // Clear the input box
+        let bankWordButtons = Array.from(wordBankContainer[0].querySelectorAll("button"));
+        bankWordButtons.some((button) => {
+          let buttonWord = button.textContent.replace(/[^\w\s]/gi, "").toLowerCase();
+          if (keyboardWord === buttonWord) {
+            button.click();
+            return true; // Stop the loop when the first match is found
+          }
+          return false; // Continue the loop
+        });
+      }    
+    });
+  }
+
+  listenKeyboard();
 
   function resetWordsInContainer(containerName) {
     while (containerName.firstChild) {
@@ -141,24 +145,10 @@ $.get('http://192.168.3.11:5000/random-verse', function (data) {
 
   createWordButtons(verseArray);
 
-  function setContainerHeight() {
-    const headerHeight  = document.getElementById('header').offsetHeight;
-    const footerHeight = document.getElementById('footer').offsetHeight;
-    console.log(headerHeight);
-    console.log(footerHeight);
-    const containerHeight = (window.innerHeight - headerHeight - footerHeight - 36) / 2;
-    wordBankContainer.style.height = `${containerHeight}px`;
-    dropAreaContainer.style.height = `${containerHeight}px`;
-  }
-  
-  setContainerHeight();
-  
-  window.addEventListener('resize', setContainerHeight);
-  
   const setWordBankHeight = wordBankContainer.offsetHeight;
-  wordBankContainer.style.height = `${setWordBankHeight}px`;
-  dropLineContainer.style.height = `${setWordBankHeight}px`;
-
+  wordBankContainer.style.height = `${setWordBankHeight + 30}px`;
+  dropAreaContainer.style.height = `${setWordBankHeight + 30}px`;
+  
   resetButton.addEventListener("click", () => {
     wordButtonsEnabled = true;
     resetWordsInContainer(wordBankContainer);
@@ -181,6 +171,7 @@ $.get('http://192.168.3.11:5000/random-verse', function (data) {
     inputBox.id = "keyboard-input";
     inputBox.placeholder = "Keyboard Input";
     checkResultsContainer.appendChild(inputBox);
+    listenKeyboard();
   });
 
     document.addEventListener("click", (event) => {
@@ -222,7 +213,7 @@ $.get('http://192.168.3.11:5000/random-verse', function (data) {
         inputBox.id = "keyboard-input";
         inputBox.placeholder = "Keyboard Input";
         checkResultsContainer.appendChild(inputBox);
-        
+        listenKeyboard();
       }
     });
 });
