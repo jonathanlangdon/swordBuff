@@ -141,14 +141,20 @@ $.get('http://192.168.3.11:5000/random-verse', function (data) {
 
   createWordButtons(verseArray);
 
-  const headerHeight = document.querySelector('.header').offsetHeight;
-  const footerHeight = document.querySelector('.footer').offsetHeight;
-  const windowHeight = window.innerHeight;
-  const containerHeight = (windowHeight - headerHeight - footerHeight) / 2;
-  wordBankContainer.style.height = `${containerHeight}px`;
-  dropAreaContainer.style.height = `${containerHeight}px`;
+  function setContainerHeight() {
+    const headerHeight  = document.getElementById('header').offsetHeight;
+    const footerHeight = document.getElementById('footer').offsetHeight;
+    console.log(headerHeight);
+    console.log(footerHeight);
+    const containerHeight = (window.innerHeight - headerHeight - footerHeight - 36) / 2;
+    wordBankContainer.style.height = `${containerHeight}px`;
+    dropAreaContainer.style.height = `${containerHeight}px`;
+  }
   
-
+  setContainerHeight();
+  
+  window.addEventListener('resize', setContainerHeight);
+  
   const setWordBankHeight = wordBankContainer.offsetHeight;
   wordBankContainer.style.height = `${setWordBankHeight}px`;
   dropLineContainer.style.height = `${setWordBankHeight}px`;
@@ -191,6 +197,9 @@ $.get('http://192.168.3.11:5000/random-verse', function (data) {
         newButton.textContent = "DONE";
         newButton.id = "done";
         checkArea.appendChild(newButton);
+        newButton.addEventListener("click", () => {
+          location.reload();
+        });
         }
       } else if (event.target && event.target.id === "next-button") {
         verseString = verses[verseIndex += 1].text;
