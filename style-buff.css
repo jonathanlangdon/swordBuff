@@ -1,11 +1,6 @@
-body {
-  overflow-y: auto;
-}
-
 * {
   box-sizing: border-box;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: white;
 }
 
 button {
@@ -16,6 +11,7 @@ button {
   font-weight: 500;
   border: 2px solid black;
   min-width: 55px;
+  background-color: white;
 }
 
 h1, h2 {
@@ -25,40 +21,31 @@ h1, h2 {
 
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   grid-template-areas:
-    "side1 header side2"
-    "side1 drop-area side2"
-    "side1 word-bank side2"
-    "side1 footer side2"
+    "sidebar-left header sidebar-right"
+    "sidebar-left drop-area sidebar-right"
+    "sidebar-left word-bank sidebar-right"
+    "sidebar-left footer sidebar-right"
 }
 
-#header {
+header {
   grid-area: header;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 0 10px;
   border-bottom: 4px solid lightgray;
   z-index: 9999;
 }
 
-#footer {
-  grid-area: footer;
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-  border-top: 4px solid lightgray;
-  z-index: 9999;
+
+.sidebar-left {
+  grid-area: sidebar-left;
 }
 
-.side1 {
-  grid-area: side1;
-}
-
-.side2 {
-  grid-area: side2;
+.sidebar-right {
+  grid-area: sidebar-right;
 }
 
 #drop-area {
@@ -71,8 +58,8 @@ h1, h2 {
 #drop-line {
   display: flex;
   flex-wrap: wrap;
-  padding-bottom: 10px;
-  padding-top: 10px;
+  padding: 10px 0;
+  overflow: auto;
   }
 
 #word-bank {
@@ -83,6 +70,8 @@ h1, h2 {
   flex-wrap: wrap;
   margin-bottom: 10px;
   margin-top: 10px;
+  overflow: auto;
+  
 }
 
 .title {
@@ -99,11 +88,11 @@ h1, h2 {
   max-width: 100%;
 }
 
-.menu-button {
+nav {
   grid-area: menu-button;
 }
 
-.menu-button img {
+nav img {
   height: auto;
   max-height: 30px;
   max-width: 100%;
@@ -113,20 +102,31 @@ h1, h2 {
   grid-area: verse;
 }
 
+
+#footer {
+  grid-area: footer;
+  display: flex;
+  padding: 20px;
+  border-top: 4px solid lightgray;
+  z-index: 9999;
+}
+
 #input-box, #keyboard-input {
   border-radius: 12px;
   font-size: 16px;
-  padding: 11px;
-  margin: 4px;
+  padding: 8px;
   font-weight: 500;
   border-color: gray;
+  width: 100%;
 }
 
 .check-area {
   flex: 1;
   justify-content: space-between;
   display: flex;
+  justify-items: center;
   align-items: center;
+  padding: 0 10px;
 }
 
 #reset {
@@ -150,13 +150,13 @@ h1, h2 {
 #check-results {
   text-align: center;
   font-size: 14px;
+  width: calc(100% - 20px);
 }
 
 .result-box {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
   padding: 10px;
   background-color: white;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
@@ -168,7 +168,7 @@ h1, h2 {
 }
 
 .result-box button {
-  margin-left: 10px;
+  margin: 0 10px;
 }
 
 .correct {
@@ -200,7 +200,7 @@ h1, h2 {
       "word-bank"
       "footer"
   }
-  .side1, .side2, .side-bottom {
+  .sidebar-left, .sidebar-right, .side-bottom {
     display: none;
   }
 }
@@ -212,7 +212,7 @@ h1, h2 {
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 415px) {
   button {
     font-size: 12px;
     padding: 5px;

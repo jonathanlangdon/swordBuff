@@ -2,31 +2,34 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=.95, user-scalable=no">
     <link rel="icon" type="image/png" href="graphics/favicon.png" sizes="32x32">
     <link rel="stylesheet" type="text/css" href="style-buff.css">
     <title>Sword Buff</title>
   </head>
   <body>
     <div class="grid-container">
-      <div id="header">
-        <div class="logo"><img src="graphics/logo-zoom1.png" alt="Sword Buff Logo"></div>
+      <header>
+        <div class="logo"><img src="graphics/logo-zoom1.png" alt="Sword Cartoon Logo for branding"></div>
         <div class="title"><h1>Sword Buff</h1><h2><div id="verse"> </div></h2></div>
-        <!-- <div class="menu-button"><img src="graphics/menu-1.png" alt="menu"></div> -->
-      </div>
-      <div class="side1"></div>
+        <!-- <nav><img src="graphics/menu-1.png" alt="Menu Button for navigation"></nav> -->
+      </header>
+      <div class="sidebar-left"></div>
+      <!-- Area where buttons are moved in order user thinks correct-->
       <div id="drop-area">
-        <div id="drop-line"></div></div>
+        <div id="drop-line"></div>
+      </div>
+      <!-- word bank with possible words to use-->
       <div id="word-bank"></div>
-      <div class="side2"></div>
+      <div class="sidebar-right"></div>
       <div id="footer">
-        <div class="side-bottom"> </div>
+        <div class="side-bottom"></div>
         <div class="check-area">
           <div><button id="reset">RESET</button></div>
           <div id="check-results"><input type="text" id="keyboard-input" placeholder="Keyboard Input" autofocus></div>
           <div id="check-button-container"><button id="check">CHECK</button></div>
         </div>
-        <div class="side-bottom"> </div>
+        <div class="side-bottom"></div>
       </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
