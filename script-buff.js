@@ -149,9 +149,14 @@ $.get('http://192.168.3.11:5000/random-verse', function (data) {
   const footerHeight = document.getElementById("footer").offsetHeight;
   const windowHeight = window.innerHeight;
   const setWordBankHeight = (windowHeight - headerHeight - footerHeight - 36)/2;
-  console.log(setWordBankHeight);
-  wordBankContainer.style.height = `${setWordBankHeight}px`;
-  dropAreaContainer.style.height = `${setWordBankHeight}px`;
+  if (parseInt(wordBankContainer.style.height) < 236) {
+    wordBankContainer.style.height = `${setWordBankHeight}px`;
+    dropAreaContainer.style.height = `${setWordBankHeight}px`;
+  } else {
+    wordBankContainer.style.height = "236px";
+    dropAreaContainer.style.height = "236px";
+  }
+
   
   resetButton.addEventListener("click", () => {
     wordButtonsEnabled = true;
