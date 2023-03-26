@@ -35,8 +35,22 @@ header {
   justify-content: center;
   align-items: center;
   padding: 0 10px;
-  border-bottom: 4px solid lightgray;
   z-index: 9999;
+}
+
+#progress-bar {
+  width: 100%;
+  height: 20px;
+  border-radius: 10px;
+  background-image: linear-gradient(to right, lightgray 0%, lightgray 100%);
+}
+  
+#progress-bar::-moz-progress-bar {
+  background-image: linear-gradient(to right, rgb(0, 226, 0) 0%, rgb(0, 226, 0) 100%);
+}
+  
+#progress-bar.complete {
+  background-image: linear-gradient(to right, lightgreen 0%, lightgreen 100%);
 }
 
 
@@ -51,7 +65,8 @@ header {
 #drop-area {
   grid-area: drop-area;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  flex-direction: column;
   border-bottom: 4px solid lightgray;
 }
 
@@ -86,6 +101,7 @@ header {
   height: auto;
   max-height: 68px;
   max-width: 100%;
+  margin-right: 20px;
 }
 
 nav {

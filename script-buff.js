@@ -36,6 +36,7 @@ $.get('http://192.168.3.11:5000/random-verse', function (data) {
   let currentVerse = verses[0];
   let verseString = currentVerse.text;
   verseString = verseString.replace(/^\d+:\s*/, '');
+  const progressBar = document.getElementById("progress-bar");
   const wordBankContainer = document.getElementById("word-bank");
   const dropAreaContainer = document.getElementById('drop-area');
   const dropLineContainer = document.getElementById('drop-line');
@@ -49,6 +50,7 @@ $.get('http://192.168.3.11:5000/random-verse', function (data) {
   let verseArray = shuffle(verseString.split(" "));
   let originalVerseArray = verseString.split(" ");
 
+  progressBar.max = numVerses;
   verseContainer.textContent = currentVerse.book + " " + currentVerse.chapter + ':' + currentVerse.verse_start;
 
     function createWordButtons(whichArray) {
@@ -222,6 +224,7 @@ $.get('http://192.168.3.11:5000/random-verse', function (data) {
         inputBox.id = "keyboard-input";
         inputBox.placeholder = "Keyboard Input";
         checkResultsContainer.appendChild(inputBox);
+        progressBar.value += 1;
         listenKeyboard();
       }
     });
