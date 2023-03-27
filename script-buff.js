@@ -10,7 +10,7 @@ function shuffle(array) {
   return array;
 }
 
-$.get('http://192.168.3.11:5000/random-verse', function (data) {
+$.get("http://192.168.3.11:5000/random-verse", function (data) {
   let verses = [];
   data.verses.forEach(function(verseData) {
     const text = verseData.text;
@@ -38,8 +38,8 @@ $.get('http://192.168.3.11:5000/random-verse', function (data) {
   verseString = verseString.replace(/^\d+:\s*/, '');
   const progressBar = document.getElementById("progress-bar");
   const wordBankContainer = document.getElementById("word-bank");
-  const dropAreaContainer = document.getElementById('drop-area');
-  const dropLineContainer = document.getElementById('drop-line');
+  const dropAreaContainer = document.getElementById("drop-area");
+  const dropLineContainer = document.getElementById("drop-line");
   const buttonLabels = [];
   let wordButtonsEnabled = true;
   const resetButton = document.querySelector("#reset");
@@ -51,24 +51,24 @@ $.get('http://192.168.3.11:5000/random-verse', function (data) {
   let originalVerseArray = verseString.split(" ");
 
   progressBar.max = numVerses;
-  verseContainer.textContent = currentVerse.book + " " + currentVerse.chapter + ':' + currentVerse.verse_start;
+  verseContainer.textContent = currentVerse.book + " " + currentVerse.chapter + ":" + currentVerse.verse_start;
 
     function createWordButtons(whichArray) {
       const fragment = document.createDocumentFragment();
       whichArray.forEach((word) => {
-        const button = document.createElement('button');
+        const button = document.createElement("button");
         button.textContent = word;
         button.id = `button-${buttonLabels.length}`;
-        button.classList.add('word-button');
+        button.classList.add("word-button");
         button.dataset.word = word;
         buttonLabels.push(word);
         wordBankContainer.appendChild(button);
         fragment.appendChild(button);
       });
       wordBankContainer.appendChild(fragment);
-      const wordButtons = document.querySelectorAll('.word-button');
+      const wordButtons = document.querySelectorAll(".word-button");
       wordButtons.forEach(button => {
-        button.addEventListener('click', () => {
+        button.addEventListener("click", () => {
           if (button.parentNode === wordBankContainer && wordButtonsEnabled) {
             dropLineContainer.appendChild(button);
           }
@@ -147,7 +147,7 @@ $.get('http://192.168.3.11:5000/random-verse', function (data) {
 
   createWordButtons(verseArray);
 
-  const headerHeight = document.querySelector('header').offsetHeight;
+  const headerHeight = document.querySelector("header").offsetHeight;
   const footerHeight = document.getElementById("footer").offsetHeight;
   const windowHeight = window.innerHeight;
   const setWordBankHeight = (windowHeight - headerHeight - footerHeight - 36)/2;
@@ -205,7 +205,7 @@ $.get('http://192.168.3.11:5000/random-verse', function (data) {
         }
       } else if (event.target && event.target.id === "next-button") {
         verseString = verses[verseIndex += 1].text;
-        verseContainer.textContent = verses[verseIndex].book + " " + verses[verseIndex].chapter + ':' + verses[verseIndex].verse_start;
+        verseContainer.textContent = verses[verseIndex].book + " " + verses[verseIndex].chapter + ":" + verses[verseIndex].verse_start;
         verseString = verseString.replace(/^\d+:\s*/, '');
         wordButtonsEnabled = true;
         resetWordsInContainer(wordBankContainer);
