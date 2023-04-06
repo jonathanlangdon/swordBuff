@@ -41,7 +41,7 @@ header {
 #progress-bar {
   width: 100%;
   height: 20px;
-  border-radius: 10px;
+  border-radius: 20px;
   background-image: linear-gradient(to right, lightgray 0%, lightgray 100%);
 }
   
@@ -53,6 +53,19 @@ header {
   background-image: linear-gradient(to right, lightgreen 0%, lightgreen 100%);
 }
 
+#progress-bar::-webkit-progress-bar {
+  background-color: lightgray;
+  border-radius: 20px;
+}
+
+#progress-bar::-webkit-progress-value {
+  background-image: linear-gradient(to right, rgb(0, 226, 0) 0%, rgb(0, 226, 0) 100%);
+  border-radius: 20px;
+}
+
+#progress-bar.complete::-webkit-progress-value {
+  background-image: linear-gradient(to right, lightgreen 0%, lightgreen 100%);
+}
 
 .sidebar-left {
   grid-area: sidebar-left;
